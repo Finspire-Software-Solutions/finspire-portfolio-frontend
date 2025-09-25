@@ -11,19 +11,19 @@ export class ContactUsComponent implements OnInit {
     {
       icon: 'fas fa-envelope',
       title: 'Email',
-      value: 'info@finspire.com',
-      link: 'mailto:info@finspire.com'
+      value: 'finspire001@gmail.com',
+      link: 'mailto:finspire001@gmail.com'
     },
     {
       icon: 'fas fa-phone',
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      link: 'tel:+15551234567'
+      value: '+94 77 042 7773, +94 76 324 4160',
+      link: 'tel:+94763244160'
     },
     {
       icon: 'fas fa-map-marker-alt',
       title: 'Address',
-      value: '123 Tech Street, Innovation City, IC 12345',
+      value: 'Kilinochchi, Nothern Province, Sri Lanka',
       link: 'https://maps.google.com'
     }
   ];
