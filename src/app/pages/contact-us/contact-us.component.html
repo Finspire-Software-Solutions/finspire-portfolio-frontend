@@ -1,0 +1,181 @@
+<div class="contact-us-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Contact Us</h1>
+        <p class="hero-description">
+          Ready to start your next project? Let's discuss how we can help
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section contact-section">
+    <div class="container">
+      <div class="contact-content">
+        <!-- Contact Form -->
+        <div class="contact-form-container">
+          <h2 class="form-title">Send us a Message</h2>
+          <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" class="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input 
+                  type="text" 
+                  id="firstName" 
+                  name="firstName" 
+                  ngModel 
+                  required 
+                  class="form-control"
+                  placeholder="Your first name">
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input 
+                  type="text" 
+                  id="lastName" 
+                  name="lastName" 
+                  ngModel 
+                  required 
+                  class="form-control"
+                  placeholder="Your last name">
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  ngModel 
+                  required 
+                  email 
+                  class="form-control"
+                  placeholder="your.email@example.com">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input 
+                  type="tel" 
+                  id="phone" 
+                  name="phone" 
+                  ngModel 
+                  class="form-control"
+                  placeholder="+1 (555) 123-4567">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input 
+                type="text" 
+                id="company" 
+                name="company" 
+                ngModel 
+                class="form-control"
+                placeholder="Your company name">
+            </div>
+
+            <div class="form-group">
+              <label for="service">Service Interested In</label>
+              <select id="service" name="service" ngModel class="form-control">
+                <option value="">Select a service</option>
+                <option value="web-development">Web Development</option>
+                <option value="mobile-development">Mobile App Development</option>
+                <option value="cloud-solutions">Cloud Solutions</option>
+                <option value="ai-ml">AI & Machine Learning</option>
+                <option value="ui-ux-design">UI/UX Design</option>
+                <option value="consulting">Technology Consulting</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                ngModel 
+                required 
+                rows="5" 
+                class="form-control"
+                placeholder="Tell us about your project..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="!contactForm.valid">
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info-container">
+          <h2 class="info-title">Get in Touch</h2>
+          <p class="info-description">
+            We're here to help and answer any questions you might have. 
+            We look forward to hearing from you.
+          </p>
+
+          <div class="contact-info-list">
+            <div class="contact-info-item" *ngFor="let info of contactInfo">
+              <div class="info-icon">
+                <i [class]="info.icon"></i>
+              </div>
+              <div class="info-content">
+                <h3 class="info-label">{{info.title}}</h3>
+                <a [href]="info.link" class="info-value">{{info.value}}</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <h3 class="social-title">Follow Us</h3>
+            <div class="social-icons">
+              <a *ngFor="let social of socialLinks" 
+                 [href]="social.url" 
+                 target="_blank" 
+                 class="social-icon">
+                <i [class]="social.icon"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="business-hours">
+            <h3 class="hours-title">Business Hours</h3>
+            <div class="hours-list">
+              <div class="hours-item">
+                <span class="day">Monday - Friday</span>
+                <span class="time">9:00 AM - 6:00 PM</span>
+              </div>
+              <div class="hours-item">
+                <span class="day">Saturday</span>
+                <span class="time">10:00 AM - 4:00 PM</span>
+              </div>
+              <div class="hours-item">
+                <span class="day">Sunday</span>
+                <span class="time">Closed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="section map-section">
+    <div class="container">
+      <h2 class="section-title">Visit Our Office</h2>
+      <div class="map-container">
+        <div class="map-placeholder">
+          <i class="fas fa-map-marked-alt"></i>
+          <p>Interactive Map Coming Soon</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

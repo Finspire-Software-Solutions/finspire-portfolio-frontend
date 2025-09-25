@@ -1,0 +1,111 @@
+<div class="about-us-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">About Finspire</h1>
+        <p class="hero-description">
+          Empowering businesses through innovative software solutions
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story Section -->
+  <section class="section story-section">
+    <div class="container">
+      <div class="story-content">
+        <div class="story-text">
+          <h2 class="section-title">Our Story</h2>
+          <p class="story-description">
+            Founded in 2024, Finspire Software Solutions began with a simple mission: to help businesses 
+            leverage technology to achieve their goals. What started as a small team of passionate developers 
+            has grown into a full-service software development company.
+          </p>
+          <p class="story-description">
+            We believe that great software is not just about code – it's about understanding our clients' 
+            challenges and creating solutions that make a real difference. Our team combines technical 
+            expertise with business acumen to deliver results that exceed expectations.
+          </p>
+          <div class="story-stats">
+            <div class="stat-item">
+              <h3 class="stat-number">5+</h3>
+              <p class="stat-label">Projects Completed</p>
+            </div>
+            <div class="stat-item">
+              <h3 class="stat-number">5+</h3>
+              <p class="stat-label">Happy Clients</p>
+            </div>
+            <div class="stat-item">
+              <h3 class="stat-number">2+</h3>
+              <p class="stat-label">Years Experience</p>
+            </div>
+            <div class="stat-item">
+              <h3 class="stat-number">5+</h3>
+              <p class="stat-label">Team Members</p>
+            </div>
+          </div>
+        </div>
+        <div class="story-visual">
+          <div class="visual-placeholder">
+            <i class="fas fa-building"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="section section-dark values-section">
+    <div class="container">
+      <h2 class="section-title">Our Values</h2>
+      <p class="section-subtitle">The principles that guide everything we do</p>
+      
+      <div class="values-grid">
+        <div class="value-card" *ngFor="let value of values">
+          <div class="value-icon">
+            <i [class]="value.icon"></i>
+          </div>
+          <h3 class="value-title">{{value.title}}</h3>
+          <p class="value-description">{{value.description}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="section team-section">
+    <div class="container">
+      <h2 class="section-title">Meet Our Team</h2>
+      <p class="section-subtitle">The talented individuals behind our success</p>
+      
+      <div class="team-grid">
+        <div class="team-card" *ngFor="let member of teamMembers">
+          <div class="team-image">
+            <div class="team-placeholder">
+              <img src="{{member.image}}" alt="{{member.name}}">
+            </div>
+          </div>
+          <div class="team-content">
+            <h3 class="team-name">{{member.name}}</h3>
+            <p class="team-position">{{member.position}}</p>
+            <p class="team-description">{{member.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section-dark cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2 class="cta-title">Ready to Work With Us?</h2>
+        <p class="cta-description">
+          Let's discuss how we can help your business grow
+        </p>
+        <a routerLink="/contact-us" class="btn btn-primary">Get In Touch</a>
+      </div>
+    </div>
+  </section>
+</div>

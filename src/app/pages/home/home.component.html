@@ -1,0 +1,147 @@
+<!-- Hero Section with Rotating Services -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <div class="rotating-services-container">
+        <div class="company-logo">
+          <!-- <i class="fas fa-code logo-icon"></i> -->
+          <h1 class="company-name">Finspire</h1>
+          <p class="company-tagline">Software Solutions</p>
+        </div>
+        
+        <div class="services-wrapper" #servicesWrapper>
+          <div class="service" *ngFor="let service of services" (click)="navigate(service.link)"
+              (mouseenter)="hoveredService = service" (mouseleave)="hoveredService = null"
+              [class.hovered]="hoveredService === service" tabindex="0" role="button"
+              [attr.aria-label]="service.ariaLabel">
+              <div class="service-icon">
+                <i [class]="service.icon"></i>
+              </div>
+              <span class="service-name">{{ service.name }}</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-text">
+        <h2 class="hero-title">Transforming Ideas into Digital Reality</h2>
+        <p class="hero-description">
+          We are a leading software solutions company specializing in cutting-edge technology 
+          and innovative digital experiences that drive business growth.
+        </p>
+        <div class="hero-actions">
+          <a routerLink="/services" class="btn btn-primary">Explore Services</a>
+          <a routerLink="/contact-us" class="btn btn-outline">Get In Touch</a>
+        </div>
+      </div>
+      </div>
+      </div>
+</section>
+
+<!-- Services Preview Section -->
+<section class="section services-preview">
+  <div class="container">
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-subtitle">Comprehensive solutions for your digital transformation</p>
+    
+    <div class="services-grid">
+      <div class="service-card" *ngFor="let service of services">
+        <div class="service-card-icon">
+          <i [class]="service.icon"></i>
+        </div>
+        <h3 class="service-card-title">{{service.name}}</h3>
+        <p class="service-card-description">Professional {{service.name.toLowerCase()}} services tailored to your needs</p>
+      </div>
+    </div>
+    
+    <div class="section-action">
+      <a routerLink="/services" class="btn btn-primary">View All Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- Works Preview Section -->
+<section class="section section-dark works-preview">
+  <div class="container">
+    <h2 class="section-title">Our Recent Works</h2>
+    <p class="section-subtitle">Showcasing our latest projects and achievements</p>
+    
+    <div class="works-grid">
+      <div class="work-card" *ngFor="let work of works">
+        <div class="work-image">
+          <div class="work-placeholder">
+            <i class="fas fa-image"></i>
+          </div>
+        </div>
+        <div class="work-content">
+          <h3 class="work-title">{{work.title}}</h3>
+          <span class="work-category">{{work.category}}</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section-action">
+      <a routerLink="/our-works" class="btn btn-primary">View All Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- About Preview Section -->
+<section class="section about-preview">
+  <div class="container">
+    <div class="about-content">
+      <div class="about-text">
+        <h2 class="section-title">About Finspire</h2>
+        <p class="about-description">
+          With years of experience in software development, we have established ourselves as a trusted 
+          partner for businesses looking to leverage technology for growth. Our team of experts is 
+          passionate about creating innovative solutions that make a difference.
+        </p>
+        <div class="about-stats">
+          <div class="stat-item">
+            <h3 class="stat-number">100+</h3>
+            <p class="stat-label">Projects Completed</p>
+          </div>
+          <div class="stat-item">
+            <h3 class="stat-number">50+</h3>
+            <p class="stat-label">Happy Clients</p>
+          </div>
+          <div class="stat-item">
+            <h3 class="stat-number">5+</h3>
+            <p class="stat-label">Years Experience</p>
+          </div>
+        </div>
+        <a routerLink="/about-us" class="btn btn-primary">Learn More</a>
+      </div>
+      <div class="about-visual">
+        <div class="visual-placeholder">
+          <i class="fas fa-users"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Preview Section -->
+<section class="section section-dark contact-preview">
+  <div class="container">
+    <div class="contact-content">
+      <h2 class="section-title">Ready to Start Your Project?</h2>
+      <p class="section-subtitle">Let's discuss how we can help bring your ideas to life</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>info@finspire.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+1 (555) 123-4567</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>123 Tech Street, Innovation City</span>
+        </div>
+      </div>
+      <a routerLink="/contact-us" class="btn btn-primary">Contact Us</a>
+    </div>
+  </div>
+</section>

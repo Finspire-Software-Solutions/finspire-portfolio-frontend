@@ -1,0 +1,52 @@
+<div class="services-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Our Services</h1>
+        <p class="hero-description">
+          Comprehensive technology solutions tailored to your business needs
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="section services-section">
+    <div class="container">
+      <div class="services-grid">
+        <div class="service-card" *ngFor="let service of services">
+          <div class="service-header">
+            <div class="service-icon">
+              <i [class]="service.icon"></i>
+            </div>
+            <h3 class="service-title">{{service.name}}</h3>
+          </div>
+          <p class="service-description">{{service.description}}</p>
+          <ul class="service-features">
+            <li *ngFor="let feature of service.features">
+              <i class="fas fa-check"></i>
+              {{feature}}
+            </li>
+          </ul>
+          <div class="service-action">
+            <a routerLink="/contact-us" class="btn btn-primary">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section-dark cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2 class="cta-title">Ready to Transform Your Business?</h2>
+        <p class="cta-description">
+          Let's discuss how our services can help you achieve your goals
+        </p>
+        <a routerLink="/contact-us" class="btn btn-primary">Contact Us Today</a>
+      </div>
+    </div>
+  </section>
+</div>
