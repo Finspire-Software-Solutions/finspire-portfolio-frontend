@@ -32,10 +32,10 @@ export class ContactUsComponent implements OnInit {
   ];
 
   socialLinks = [
-    { icon: 'fab fa-linkedin', url: 'https://linkedin.com/company/finspire' },
-    { icon: 'fab fa-twitter', url: 'https://twitter.com/finspire' },
-    { icon: 'fab fa-github', url: 'https://github.com/finspire' },
-    { icon: 'fab fa-facebook', url: 'https://facebook.com/finspire' }
+    { icon: 'fab fa-linkedin', url: 'https://www.linkedin.com/company/finspiresoftwaresolution' },
+    // { icon: 'fab fa-twitter', url: 'https://twitter.com/finspire' },
+    { icon: 'fab fa-instagram', url: 'https://www.instagram.com/fins_pire?igsh=Y3p0eHR2MDAzNjlj' },
+    { icon: 'fab fa-facebook', url: 'https://www.facebook.com/share/1LaM55SZjo/' }
   ];
 
   constructor( private fb: FormBuilder, private toast: ToastService,private __contact: ContactService) { }
