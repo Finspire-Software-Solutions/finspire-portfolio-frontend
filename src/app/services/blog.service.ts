@@ -42,7 +42,7 @@ export interface Page<T> {
 @Injectable({ providedIn: 'root' })
 export class BlogService {
   // Adjust this to your Spring Boot base URL if needed
-  private apiUrl = 'http://localhost:8080/api/v1/blogs'; 
+  private apiUrl = 'https://finspire-portfolio-backend.onrender.com/api/v1/blogs'; 
 
   constructor(private http: HttpClient) {}
 

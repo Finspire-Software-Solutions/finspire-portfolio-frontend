@@ -47,7 +47,7 @@ interface ProjectApi {
 @Injectable({ providedIn: 'root' })
 export class ProjectService {
   // Choose the path matching your controller mapping
-  private apiUrl = 'http://localhost:8080/api/v1/projects';
+  private apiUrl = 'https://finspire-portfolio-backend.onrender.com/api/v1/projects';
 
   constructor(private http: HttpClient) {}
 
