@@ -21,7 +21,6 @@ export class OurWorksComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadWorks();
-    this.loadCategories();
   }
 
   loadWorks(): void {
@@ -29,6 +28,7 @@ export class OurWorksComponent implements OnInit {
       next: (resp) => {
         this.works = resp.content;
         console.log('works loaded', this.works);
+        this.loadCategories();
       },
       error: (err) => {
         console.error('Failed to load works', err);
@@ -43,6 +43,7 @@ export class OurWorksComponent implements OnInit {
       ...projectCats
     ]));
     this.categories = ['All', ...merged];
+    console.log('categories', this.categories);
   }
 
   filterWorks(category: string) {

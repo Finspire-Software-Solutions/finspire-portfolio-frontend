@@ -41,7 +41,14 @@ export class BlogComponent implements OnInit {
       }
     });
   }
-
+  // loadCategories(): void {
+  //   const projectCats = Array.from(new Set(this.posts.map(p => p.tags).filter(Boolean)));
+  //   const merged = Array.from(new Set([
+  //     ...projectCats
+  //   ]));
+  //   this.tags = ['All', ...merged];
+  //   console.log('categories', this.tags);
+  // }
   nextPage() {
     if (this.page + 1 < this.totalPages) {
       this.page += 1;

@@ -479,17 +479,17 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  clearTags(): void {
-    while (this.tagsFA.length) {
-      this.tagsFA.removeAt(0);
+  onTagKeyPress(evt: KeyboardEvent, input: HTMLInputElement): void {
+    if (evt.key === 'Enter') {
+      evt.preventDefault();
+      this.addTagControl(input.value);
+      input.value = '';
     }
   }
 
-  onTagKeyPress(event: KeyboardEvent, input: HTMLInputElement): void {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      this.addTagControl(input.value);
-      input.value = '';
+  clearTags(): void {
+    while (this.tagsFA.length) {
+      this.tagsFA.removeAt(0);
     }
   }
 

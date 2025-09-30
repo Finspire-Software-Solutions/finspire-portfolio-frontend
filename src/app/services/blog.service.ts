@@ -92,7 +92,7 @@ export class BlogService {
     return this.http.post<string>(this.apiUrl, formData, { responseType: 'text' as 'json' });
   }
 
-  updateBlog(id: string, updated: Partial<BlogPost>, file?: File | null): Observable<BlogPost> {
+  updateBlog(id: string, updated: Partial<BlogPost>, file?: File | null): Observable<string> {
     const formData = new FormData();
     if (file) {
       formData.append('file', file);
@@ -101,7 +101,7 @@ export class BlogService {
       'blogsRequestDto',
       new Blob([JSON.stringify(updated)], { type: 'application/json' })
     );
-    return this.http.put<BlogPost>(`${this.apiUrl}/${id}`, formData, { responseType: 'text' as 'json' });
+    return this.http.put<string>(`${this.apiUrl}/${id}`, formData, { responseType: 'text' as 'json' });
   }
 
   deleteBlog(id: string): Observable<string> {

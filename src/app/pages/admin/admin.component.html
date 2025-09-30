@@ -311,6 +311,29 @@
                 placeholder="Write your content..."></textarea>
             </div>
 
+            <!-- Blog Tags -->
+            <div class="form-group">
+              <label>Tags</label>
+              <div class="tech-input-container">
+                <input
+                  type="text"
+                  #tagInput
+                  class="form-control tech-input"
+                  placeholder="Enter tag and press Enter"
+                  (keypress)="onTagKeyPress($event, tagInput)"
+                />
+                <button type="button" class="btn btn-outline" (click)="addTagControl(tagInput.value); tagInput.value = ''">
+                  Add
+                </button>
+              </div>
+              <div class="tech-tags" *ngIf="tagsFA?.length">
+                <span class="tech-tag" *ngFor="let ctrl of tagsFA.controls; let i = index">
+                  #{{ ctrl.value }}
+                  <i class="fas fa-times" (click)="removeTag(i)"></i>
+                </span>
+              </div>
+            </div>
+
             <div class="form-group">
               <label for="cover">Cover Image</label>
               <input
