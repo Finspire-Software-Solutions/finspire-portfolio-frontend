@@ -1,54 +1,64 @@
 <div class="blog-page">
-  <div class="container">
-    <div class="blog-header">
-      <h1 class="section-title">Blog</h1>
-      <p class="section-subtitle">Insights, updates, and stories from our team.</p>
-
-      <div class="filters">
-        <label class="filter-label">Filter by tag</label>
-        <select [(ngModel)]="selectedTag" class="filter-select">
-          <option *ngFor="let tag of tags" [value]="tag">{{ tag }}</option>
-        </select>
+  <!-- Hero Section to match other pages -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Blog</h1>
+        <p class="hero-description">Insights, updates, and stories from our team.</p>
       </div>
     </div>
+  </section>
 
-    <div class="posts-grid">
-      <article class="post-card" *ngFor="let post of posts">
-        <div class="cover" *ngIf="post.coverImage">
-          <img [src]="post.coverImage" [alt]="post.title" />
+  <!-- Blog Content Section -->
+  <section class="section blog-section">
+    <div class="container">
+      <div class="blog-header">
+        <div class="filters">
+          <label class="filter-label">Filter by tag</label>
+          <select [(ngModel)]="selectedTag" class="filter-select">
+            <option *ngFor="let tag of tags" [value]="tag">{{ tag }}</option>
+          </select>
         </div>
-        <div class="content">
-          <h2 class="post-title">{{ post.title }}</h2>
-          <div class="meta">
-            <span class="date"><i class="fas fa-calendar"></i> {{ post.createdDate | date:'MMM dd, yyyy' }}</span>
-          </div>
-          <p class="excerpt">{{ post.content | slice:0:180 }}<span *ngIf="isLong(post, 180)">...</span></p>
-          <button class="link-button" (click)="openPost(post)">Read more</button>
-          <div class="tags">
-            <span class="tag" *ngFor="let t of post.tags">#{{ t }}</span>
-          </div>
-        </div>
-      </article>
-    </div>
+      </div>
 
-    <div class="empty-state" *ngIf="filtered.length === 0">
-      <i class="fas fa-file-alt"></i>
-      <h3>No blog posts</h3>
-      <p>Please check back later.</p>
-    </div>
+      <div class="posts-grid">
+        <article class="post-card" *ngFor="let post of filtered">
+          <div class="cover" *ngIf="post.coverImage">
+            <img [src]="post.coverImage" [alt]="post.title" />
+          </div>
+          <div class="content">
+            <h2 class="post-title">{{ post.title }}</h2>
+            <div class="meta">
+              <span class="date"><i class="fas fa-calendar"></i> {{ post.createdDate | date:'MMM dd, yyyy' }}</span>
+            </div>
+            <p class="excerpt">{{ post.content | slice:0:180 }}<span *ngIf="isLong(post, 180)">...</span></p>
+            <button class="link-button" (click)="openPost(post)">Read more</button>
+            <div class="tags">
+              <span class="tag" *ngFor="let t of post.tags">#{{ t }}</span>
+            </div>
+          </div>
+        </article>
+      </div>
 
-    <!-- Pagination Controls -->
-    <div class="pagination" *ngIf="totalPages > 1">
-      <button class="btn btn-outline" (click)="prevPage()" [disabled]="page === 0">Prev</button>
-      <ng-container *ngFor="let p of [].constructor(totalPages); let i = index">
-        <button class="btn" [class.btn-primary]="i === page" [class.btn-outline]="i !== page" (click)="goToPage(i)">
-          {{ i + 1 }}
-        </button>
-      </ng-container>
-      <button class="btn btn-outline" (click)="nextPage()" [disabled]="page + 1 >= totalPages">Next</button>
-      <span class="page-info">Page {{ page + 1 }} of {{ totalPages }} ({{ totalElements }} items)</span>
+      <div class="empty-state" *ngIf="filtered.length === 0">
+        <i class="fas fa-file-alt"></i>
+        <h3>No blog posts</h3>
+        <p>Please check back later.</p>
+      </div>
+
+      <!-- Pagination Controls -->
+      <div class="pagination" *ngIf="totalPages > 1">
+        <button class="btn btn-outline" (click)="prevPage()" [disabled]="page === 0">Prev</button>
+        <ng-container *ngFor="let p of [].constructor(totalPages); let i = index">
+          <button class="btn" [class.btn-primary]="i === page" [class.btn-outline]="i !== page" (click)="goToPage(i)">
+            {{ i + 1 }}
+          </button>
+        </ng-container>
+        <button class="btn btn-outline" (click)="nextPage()" [disabled]="page + 1 >= totalPages">Next</button>
+        <span class="page-info">Page {{ page + 1 }} of {{ totalPages }} ({{ totalElements }} items)</span>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- Blog Post Modal -->
   <div class="modal-backdrop" *ngIf="showPostModal" (click)="closePostModal()"></div>

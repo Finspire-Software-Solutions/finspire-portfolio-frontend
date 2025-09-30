@@ -2,6 +2,26 @@
   padding: 80px 0 60px;
   background: #f8fafc;
 
+  .hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #00014d 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero-description {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
   .blog-header {
     text-align: center;
     margin-bottom: 32px;
@@ -115,6 +135,10 @@
 
   @media (max-width: 768px) {
     padding-top: 70px;
+    .hero-section {
+      .hero-title { font-size: 2rem; }
+      .hero-description { font-size: 1rem; }
+    }
     .posts-grid { grid-template-columns: 1fr; gap: 16px; }
     .post-card .cover img { height: 180px; }
   }

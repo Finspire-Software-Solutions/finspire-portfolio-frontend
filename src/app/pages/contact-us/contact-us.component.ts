@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ContactService } from 'src/app/services/contact.service';
+import { ToastService } from 'src/app/shared/toast/toast.service';
 
 @Component({
   selector: 'app-contact-us',
@@ -35,18 +38,35 @@ export class ContactUsComponent implements OnInit {
     { icon: 'fab fa-facebook', url: 'https://facebook.com/finspire' }
   ];
 
-  constructor() { }
+  constructor( private fb: FormBuilder, private toast: ToastService,private __contact: ContactService) { }
 
+  contactForm!: FormGroup;
   ngOnInit(): void {
+    this.contactForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phoneNo: ['', Validators.required],
+      company: ['', Validators.required],
+      interestedService: ['', Validators.required],
+      message: ['', [Validators.required, Validators.minLength(10)]],
+    });
   }
 
-  onSubmit(form: any) {
+  onSubmit(form: FormGroup) {
     if (form.valid) {
-      // Handle form submission here
       console.log('Form submitted:', form.value);
-      // You can add your form submission logic here
-      alert('Thank you for your message! We will get back to you soon.');
-      form.reset();
+      if (form.valid) {
+        this.__contact.addContact(form.value).subscribe({
+          next: (res) => {
+            this.toast.success(res);
+            form.reset();
+          },
+          error: (err) => {
+            this.toast.error(err.error);
+          }
+        })
+      }
     }
   }
 

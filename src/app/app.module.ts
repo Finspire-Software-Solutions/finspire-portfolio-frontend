@@ -19,6 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { ToastContainerComponent } from './shared/toast/toast-container.component';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { LoaderInterceptor } from './shared/loader/loader.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,10 +44,13 @@ import { ToastContainerComponent } from './shared/toast/toast-container.componen
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    // Standalone loader component so it can be used in templates
+    LoaderComponent
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

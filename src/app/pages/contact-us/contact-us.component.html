@@ -18,7 +18,7 @@
         <!-- Contact Form -->
         <div class="contact-form-container">
           <h2 class="form-title">Send us a Message</h2>
-          <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" class="contact-form">
+          <form [formGroup]="contactForm" class="contact-form">
             <div class="form-row">
               <div class="form-group">
                 <label for="firstName">First Name *</label>
@@ -26,7 +26,7 @@
                   type="text" 
                   id="firstName" 
                   name="firstName" 
-                  ngModel 
+                  formControlName="firstName" 
                   required 
                   class="form-control"
                   placeholder="Your first name">
@@ -37,7 +37,7 @@
                   type="text" 
                   id="lastName" 
                   name="lastName" 
-                  ngModel 
+                  formControlName="lastName" 
                   required 
                   class="form-control"
                   placeholder="Your last name">
@@ -51,7 +51,7 @@
                   type="email" 
                   id="email" 
                   name="email" 
-                  ngModel 
+                  formControlName="email" 
                   required 
                   email 
                   class="form-control"
@@ -63,7 +63,7 @@
                   type="tel" 
                   id="phone" 
                   name="phone" 
-                  ngModel 
+                  formControlName="phoneNo" 
                   class="form-control"
                   placeholder="+1 (555) 123-4567">
               </div>
@@ -75,14 +75,14 @@
                 type="text" 
                 id="company" 
                 name="company" 
-                ngModel 
+                formControlName="company" 
                 class="form-control"
                 placeholder="Your company name">
             </div>
 
             <div class="form-group">
               <label for="service">Service Interested In</label>
-              <select id="service" name="service" ngModel class="form-control">
+              <select id="service" name="service" formControlName="interestedService" class="form-control">
                 <option value="">Select a service</option>
                 <option value="web-development">Web Development</option>
                 <option value="mobile-development">Mobile App Development</option>
@@ -99,14 +99,14 @@
               <textarea 
                 id="message" 
                 name="message" 
-                ngModel 
+                formControlName="message" 
                 required 
                 rows="5" 
                 class="form-control"
                 placeholder="Tell us about your project..."></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary" [disabled]="!contactForm.valid">
+            <button type="button" class="btn btn-primary" (click)="onSubmit(contactForm)">
               Send Message
             </button>
           </form>
