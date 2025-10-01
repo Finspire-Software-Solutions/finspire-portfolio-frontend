@@ -36,6 +36,20 @@
             <div class="tags">
               <span class="tag" *ngFor="let t of post.tags">#{{ t }}</span>
             </div>
+            <div class="modal-social">
+              <a *ngIf="post.instagramLink" [href]="post.instagramLink" target="_blank" class="social-link instagram" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a *ngIf="post.facebookLink" [href]="post.facebookLink" target="_blank" class="social-link facebook" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a *ngIf="post.linkedinLink" [href]="post.linkedinLink" target="_blank" class="social-link linkedin" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a *ngIf="post.githubLink" [href]="post.githubLink" target="_blank" class="social-link github" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
           </div>
         </article>
       </div>
@@ -82,9 +96,21 @@
         <div class="modal-body">
           {{ post.content }}
         </div>
+        <div class="modal-social">
+          <a *ngIf="post.instagramLink" [href]="post.instagramLink" target="_blank" class="social-link instagram" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a *ngIf="post.facebookLink" [href]="post.facebookLink" target="_blank" class="social-link facebook" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a *ngIf="post.linkedinLink" [href]="post.linkedinLink" target="_blank" class="social-link linkedin" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a *ngIf="post.githubLink" [href]="post.githubLink" target="_blank" class="social-link github" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
       </ng-container>
     </div>
   </div>
 </div>
-
-

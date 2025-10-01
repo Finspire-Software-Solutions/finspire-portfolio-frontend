@@ -351,7 +351,56 @@
               </div>
 
             </div>
-
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label>GitHub Link</label>
+                <div class="tech-input-container">
+                  <input
+                    type="text"
+                    class="form-control tech-input"
+                    placeholder="Enter GitHub link"
+                    formControlName="githubLink"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Facebook Link</label>
+                <div class="tech-input-container">
+                  <input
+                    type="text"
+                    class="form-control tech-input"
+                    placeholder="Enter Facebook link"
+                    formControlName="facebookLink"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Instagram Link</label>
+                <div class="tech-input-container">
+                  <input
+                    type="text"
+                    class="form-control tech-input"
+                    placeholder="Enter Instagram link"
+                    formControlName="instagramLink"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>LinkedIn Link</label>
+                <div class="tech-input-container">
+                  <input
+                    type="text"
+                    class="form-control tech-input"
+                    placeholder="Enter LinkedIn link"
+                    formControlName="linkedinLink"
+                  />
+                </div>
+              </div>
+            </div>
+            
             <div class="form-actions">
               <button (click)="saveBlog()" type="button" class="btn btn-primary">
                 {{isAddingBlog ? 'Add Post' : 'Update Post'}}

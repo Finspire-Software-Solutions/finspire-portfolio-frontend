@@ -98,7 +98,11 @@ export class AdminComponent implements OnInit {
       content: ['', [Validators.required, Validators.minLength(10)]],
       coverImage: [''],
       published: [false],
-      tags: this.fb.array([])
+      tags: this.fb.array([]),
+      instagramLink: [''],
+      facebookLink: [''],
+      linkedinLink: [''],
+      githubLink: [''],
     });
 
     this.projectsForm = this.fb.group({
@@ -109,7 +113,7 @@ export class AdminComponent implements OnInit {
       category: ['', Validators.required],
       technologies: this.fb.array([]),
       mediaType: [''],
-    });
+      });
 
     // ================= NEW: Initialize forms for added sections =================
     this.trackingForm = this.fb.group({
@@ -361,14 +365,18 @@ export class AdminComponent implements OnInit {
     content: '',
     coverImage: '',
     tags: [],
-    published: false
+    published: false,
+    instagramLink: '',
+    facebookLink: '',
+    linkedinLink: '',
+    githubLink: ''
   };
 
   startAddingBlog(): void {
     this.isAddingBlog = true;
     this.editingBlog = null;
     this.resetNewBlog();
-    this.blogsForm.reset({ title: '', content: '', coverImage: '', published: false });
+    this.blogsForm.reset({ title: '', content: '', coverImage: '', published: false ,instagramLink: '', facebookLink: '', linkedinLink: '', githubLink: ''});
     this.clearTags();
     this.selectedCoverFile = null;
   }
@@ -380,7 +388,11 @@ export class AdminComponent implements OnInit {
       title: post.title,
       content: post.content,
       coverImage: post.coverImage,
-      published: post.published
+      published: post.published,
+      instagramLink: post.instagramLink,
+      facebookLink: post.facebookLink,
+      linkedinLink: post.linkedinLink,
+      githubLink: post.githubLink
     });
     this.clearTags();
     (post.tags || []).forEach(t => this.addTagControl(t));
@@ -390,18 +402,23 @@ export class AdminComponent implements OnInit {
     this.isAddingBlog = false;
     this.editingBlog = null;
     this.resetNewBlog();
-    this.blogsForm.reset({ title: '', content: '', coverImage: '', published: false });
+    this.blogsForm.reset({ title: '', content: '', coverImage: '', published: false,instagramLink: '', facebookLink: '', linkedinLink: '', githubLink: '' });
     this.clearTags();
     this.selectedCoverFile = null;
   }
 
   saveBlog(): void {
     console.log(this.blogsForm.value);
-    if (this.blogsForm.invalid) return;
+    if (this.blogsForm.value.title.length === 0 || this.blogsForm.value.content.length === 0) 
+    {this.toast.error('Blog title, content and cover image are required');return;};
     const dto: BlogRequestDto = {
       title: this.blogsForm.value.title,
       content: this.blogsForm.value.content,
-      tags: (this.blogsForm.value.tags || []) as string[]
+      tags: (this.blogsForm.value.tags || []) as string[],
+      instagramLink: this.blogsForm.value.instagramLink,
+      facebookLink: this.blogsForm.value.facebookLink,
+      linkedinLink: this.blogsForm.value.linkedinLink,
+      githubLink: this.blogsForm.value.githubLink
     };
 
     if (this.isAddingBlog) {
@@ -454,7 +471,11 @@ export class AdminComponent implements OnInit {
       content: '',
       coverImage: '',
       tags: [],
-      published: false
+      published: false,
+      instagramLink: '',
+      facebookLink: '',
+      linkedinLink: '',
+      githubLink: ''
     };
   }
 

@@ -134,6 +134,11 @@
     color: #666;
   }
 
+  .modal-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
   @media (max-width: 768px) {
     padding-top: 70px;
     .hero-section {

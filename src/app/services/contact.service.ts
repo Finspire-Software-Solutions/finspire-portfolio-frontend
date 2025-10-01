@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ContactService {
 
-    private apiUrl = 'https://finspire-portfolio-backend.onrender.com/api/v1/contact';
+    private apiUrl = 'http://72.60.200.48:8080/api/v1/contact';
   
     constructor(private http: HttpClient) {}
 

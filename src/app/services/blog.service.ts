@@ -12,6 +12,10 @@ export interface BlogPost {
   tags: string[];
   published: boolean;
   createdDate: Date;
+  instagramLink: string;
+  facebookLink: string;
+  linkedinLink: string;
+  githubLink: string;
 }
 
 // Backend API model for a single blog item in the Page response
@@ -22,6 +26,10 @@ interface BlogApi {
   coverImage: string;
   tags: string | string[] | null;
   createdAt: string; // date string
+  instagramLink: string;
+  facebookLink: string;
+  linkedinLink: string;
+  githubLink: string;
 }
 
 // Spring Page response
@@ -41,7 +49,7 @@ export interface Page<T> {
 
 @Injectable({ providedIn: 'root' })
 export class BlogService {
-  private apiUrl = 'https://finspire-portfolio-backend.onrender.com/api/v1/blogs'; 
+  private apiUrl = 'http://72.60.200.48:8080/api/v1/blogs'; 
 
   constructor(private http: HttpClient) {}
 
@@ -66,7 +74,11 @@ export class BlogService {
                     ? b.tags.split(/[,#\s]+/).filter(Boolean)
                     : []),
               published: true, // default to true if not provided
-              createdDate: new Date(b.createdAt)
+              createdDate: new Date(b.createdAt),
+              instagramLink: b.instagramLink,
+              facebookLink: b.facebookLink,
+              linkedinLink: b.linkedinLink,
+              githubLink: b.githubLink
             }))
           };
           return mapped;
