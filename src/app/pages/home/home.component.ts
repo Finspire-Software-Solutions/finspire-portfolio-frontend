@@ -20,9 +20,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ];
 
   works = [
-    { title: 'E-commerce Platform', category: 'Web Development', image: 'assets/work1.jpg' },
-    { title: 'Healthcare App', category: 'Mobile Development', image: 'assets/work2.jpg' },
-    { title: 'Analytics Dashboard', category: 'Data Visualization', image: 'assets/work3.jpg' }
+    { title: 'Grand Pittu', category: 'Web Development', image: 'assets/grandpittu.png' },
+    { title: 'Finspire Portfolio', category: 'Web Development', image: 'assets/finspire-portfolio.png' },
+    { title: 'Kalaisankara Matrimony', category: 'Web Development', image: 'assets/kalaisankara.png' }
   ];
 
   private rotationDegree = 0;
