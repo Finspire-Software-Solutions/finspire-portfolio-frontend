@@ -47,8 +47,7 @@ interface ProjectApi {
 @Injectable({ providedIn: 'root' })
 export class ProjectService {
   // Choose the path matching your controller mapping
-  private apiUrl = 'http://72.60.200.48:8080/api/v1/projects';
-
+  private apiUrl = 'https://api.finspire.lk/api/v1/projects';  
   constructor(private http: HttpClient) {}
 
   getProjects(page = 0, size = 10): Observable<Page<Project>> {

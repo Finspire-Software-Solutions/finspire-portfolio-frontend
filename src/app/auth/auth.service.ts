@@ -11,7 +11,7 @@ export interface AuthResponse {
 export class AuthService {
   private readonly ACCESS_TOKEN_KEY = 'access_token';
   private readonly REFRESH_TOKEN_KEY = 'refresh_token';
-  private readonly API_BASE = 'http://72.60.200.48:8080/api/v1/auth';
+  private readonly API_BASE = 'https://api.finspire.lk//api/v1/auth';
 
   // Expose auth state so components/guards can react
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasValidAccessToken());

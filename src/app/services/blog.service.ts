@@ -49,7 +49,7 @@ export interface Page<T> {
 
 @Injectable({ providedIn: 'root' })
 export class BlogService {
-  private apiUrl = 'http://72.60.200.48:8080/api/v1/blogs'; 
+  private apiUrl = 'https://api.finspire.lk/api/v1/blogs'; 
 
   constructor(private http: HttpClient) {}
 
