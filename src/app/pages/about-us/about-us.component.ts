@@ -22,7 +22,7 @@ export class AboutUsComponent implements OnInit {
     },
     {
       name: 'M.AJEETHKUMAR',
-      position: 'Media Lead, Graphic Designer, Video Editor',
+      position: 'Social Media Lead, Graphic Designer, Video Editor',
       description: 'Driving creative content and brand growth.',
       image: 'assets/ajewethkumar.png'
     },

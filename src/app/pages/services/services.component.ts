@@ -27,10 +27,10 @@ export class ServicesComponent implements OnInit {
       features: ['AWS/Azure/GCP', 'DevOps & CI/CD', 'Microservices', 'Container Orchestration']
     },
     {
-      name: 'AI & Machine Learning',
-      icon: 'fas fa-brain',
-      description: 'Intelligent solutions powered by artificial intelligence and machine learning',
-      features: ['Data Analytics', 'Predictive Modeling', 'Natural Language Processing', 'Computer Vision']
+      name: 'Graphics Designs',
+      icon: 'fas fa-paint-brush',
+      description: 'Professional graphics designs for your business',
+      features: ['Logo Design', 'Banner Design', 'Poster Design', 'Business Card Design']
     },
     {
       name: 'UI/UX Design',
@@ -39,10 +39,16 @@ export class ServicesComponent implements OnInit {
       features: ['User Research', 'Wireframing', 'Prototyping', 'Design Systems']
     },
     {
-      name: 'Technology Consulting',
-      icon: 'fas fa-handshake',
-      description: 'Strategic technology consulting to help businesses make informed decisions',
-      features: ['Digital Transformation', 'Architecture Review', 'Technology Roadmap', 'Process Optimization']
+      name: 'Video Editing',
+      icon: 'fas fa-video',
+      description: 'Professional video editing services for your business',
+      features: ['Video Editing', 'Video Production', 'Video Marketing', 'Video Production']
+    },
+    {
+      name: 'Digital Marketing',
+      icon: 'fas fa-bullhorn',
+      description: 'Professional digital marketing services for your business',
+      features: ['Search Engine Optimization', 'Pay Per Click', 'Social Media Marketing', 'Email Marketing']
     }
   ];
 

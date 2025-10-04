@@ -8,12 +8,13 @@ import { Observable } from 'rxjs';
 })
 export class ContactService {
 
-    private apiUrl = 'https://api.finspire.lk/api/v1/contact';
+    // private apiUrl = 'https://api.finspire.lk/api/v1/contact';
+    private apiUrl = 'http://localhost:8080/api/v1/contact';
   
     constructor(private http: HttpClient) {}
 
   addContact(contact: ContactRequestDto): Observable<string> {
-      return this.http.post<string>(this.apiUrl, contact);
+      return this.http.post<string>(this.apiUrl, contact,{ responseType: 'text' as 'json' });
   }
 
 }

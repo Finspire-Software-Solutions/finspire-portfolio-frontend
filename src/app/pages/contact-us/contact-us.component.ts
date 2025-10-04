@@ -59,10 +59,12 @@ export class ContactUsComponent implements OnInit {
       if (form.valid) {
         this.__contact.addContact(form.value).subscribe({
           next: (res) => {
+            console.log("Contact added successfully",res); 
             this.toast.success(res);
             form.reset();
           },
           error: (err) => {
+            console.log("Contact added failed",err); 
             this.toast.error(err.error);
           }
         })

@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { ClientRequestDto } from 'src/app/model/ClientRequestDto';
 
 @Component({
   selector: 'app-home',
@@ -28,10 +29,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
   private rotationDegree = 0;
   private radius = 200;
   hoveredService: any = null;
+  clients:ClientRequestDto[] = [];
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.clients = [
+      { name: 'Grand Pittu', description: 'Web Development', image: 'assets/grandpittu.png' },
+      { name: 'Finspire Portfolio', description: 'Web Development', image: 'assets/finspire-portfolio.png' },
+      { name: 'Kalaisankara Matrimony', description: 'Web Development', image: 'assets/kalaisankara.png' }
+    ];
   }
 
   ngAfterViewInit() {
@@ -98,5 +105,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   navigate(link: string) {
     this.router.navigate([link]);
   }
+
+
 
 }
