@@ -52,8 +52,8 @@ import { GridComponent } from './components/grid/grid.component';
     HttpClientModule,
     // Standalone loader component so it can be used in templates
     LoaderComponent,
-     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore())
+    //  provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    // provideFirestore(() => getFirestore())
   ],
 providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
