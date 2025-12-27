@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { GridComponent } from 'src/app/components/grid/grid.component';
 @Component({
   selector: 'app-services',
   templateUrl: './services.component.html',

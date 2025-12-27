@@ -54,7 +54,7 @@ export class ContactUsComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup) {
-    if (form.valid) {
+    debugger
       console.log('Form submitted:', form.value);
       if (form.valid) {
         this.__contact.addContact(form.value).subscribe({
@@ -69,7 +69,6 @@ export class ContactUsComponent implements OnInit {
           }
         })
       }
-    }
   }
 
 }

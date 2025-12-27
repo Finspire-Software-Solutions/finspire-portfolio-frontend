@@ -21,7 +21,11 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { ToastContainerComponent } from './shared/toast/toast-container.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { LoaderInterceptor } from './shared/loader/loader.interceptor';
-
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth'; // Optional: if using Firebase Auth
+import { environment } from '../environments/environment';
+import { GridComponent } from './components/grid/grid.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +40,8 @@ import { LoaderInterceptor } from './shared/loader/loader.interceptor';
     LogoComponent,
     BlogComponent,
     LoginComponent,
-    ToastContainerComponent
+    ToastContainerComponent,
+    GridComponent
     
   ],
   imports: [
@@ -46,12 +51,14 @@ import { LoaderInterceptor } from './shared/loader/loader.interceptor';
     ReactiveFormsModule,
     HttpClientModule,
     // Standalone loader component so it can be used in templates
-    LoaderComponent
+    LoaderComponent,
+     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore())
   ],
-  providers: [
+providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
-  ],
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

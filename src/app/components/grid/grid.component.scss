@@ -1,0 +1,37 @@
+/* Grid Background */
+.grid-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.grid-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Floating Particles */
+.particle {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.3;
+  }
+  25% { 
+    opacity: 0.8;
+  }
+  50% { 
+    transform: translateY(-30px) translateX(10px);
+    opacity: 0.5;
+  }
+  75% { 
+    opacity: 0.8;
+  }
+}

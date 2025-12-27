@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClientRequestDto } from 'src/app/model/ClientRequestDto';
+import { WorksService } from 'src/app/services/works.service';
 
 @Component({
   selector: 'app-home',
@@ -19,26 +20,42 @@ export class HomeComponent implements OnInit, AfterViewInit {
     { name: 'Web Development', icon: 'fas fa-globe', link: '/services', ariaLabel: 'Web Development - Modern web development solutions' },
     { name: '24/7 Support', icon: 'fas fa-headset', link: '/contact-us', ariaLabel: '24/7 Support - Round the clock support services' }
   ];
-
-  works = [
-    { title: 'Grand Pittu', category: 'Web Development', image: 'assets/grandpittu.png' },
-    { title: 'Finspire Portfolio', category: 'Web Development', image: 'assets/finspire-portfolio.png' },
-    { title: 'Kalaisankara Matrimony', category: 'Web Development', image: 'assets/kalaisankara.png' }
+clients = [
+    { name: 'Client 1', logo: 'https://res.cloudinary.com/dc7gkgjja/image/upload/v1766652299/og-image_kxqn38.png' },
+    { name: 'Client 2', logo: 'https://res.cloudinary.com/dc7gkgjja/image/upload/v1766652400/Logo_2_gcjobz.png' },
+    { name: 'Client 3', logo: 'https://res.cloudinary.com/dc7gkgjja/image/upload/v1766653056/Aura_Water_Management_7_tx2yuv.png' },
+    { name: 'Client 4', logo: 'https://res.cloudinary.com/dc7gkgjja/image/upload/v1766657309/Aura_Water_Management_8_rufscf.png'},
+    { name: 'Client 5', logo: 'https://res.cloudinary.com/dc7gkgjja/image/upload/v1766657455/WhatsApp_Image_2025-06-01_at_20.02.08_6c014f23_m4hd5d.jpg' },
   ];
+
+works = [
+  { 
+    title: 'Grand Pittu',
+    category: 'Web Development',
+    image: 'https://res.cloudinary.com/dc7gkgjja/image/upload/v1759299763/ozs1sl04jmyslhhq2ort.png',
+    logo: 'https://res.cloudinary.com/dc7gkgjja/image/upload/v1766653190/7572c9f2-a406-4a68-9b61-47148632c93e-converted_mmhazx.png'
+  },
+  { 
+    title: 'Aura Water Management',
+    category: 'Web Development',
+    image: 'https://res.cloudinary.com/dc7gkgjja/image/upload/v1766665510/AuraWater_osoflw.png',
+    logo: 'https://res.cloudinary.com/dc7gkgjja/image/upload/v1766664881/aura_logo_fjkmk0.png'
+  },
+  { 
+    title: 'Grace Home Renovation',
+    category: 'Web Development',
+    image: 'https://res.cloudinary.com/dc7gkgjja/image/upload/v1766665573/GraceHomeReno_ela64s.png',
+    logo: 'https://res.cloudinary.com/dc7gkgjja/image/upload/v1766665644/Screenshot_2025-12-14_233145_fuszyr.png'
+  }
+];
 
   private rotationDegree = 0;
   private radius = 200;
   hoveredService: any = null;
-  clients:ClientRequestDto[] = [];
-
-  constructor(private router: Router) { }
+  constructor(private router: Router,private worksService: WorksService) { }
 
   ngOnInit(): void {
-    this.clients = [
-      { name: 'Grand Pittu', description: 'Web Development', image: 'assets/grandpittu.png' },
-      { name: 'Finspire Portfolio', description: 'Web Development', image: 'assets/finspire-portfolio.png' },
-      { name: 'Kalaisankara Matrimony', description: 'Web Development', image: 'assets/kalaisankara.png' }
-    ];
+    this.loadRecentWorks();
   }
 
   ngAfterViewInit() {
@@ -101,11 +118,39 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     animateFrame();
   }
-
+  
   navigate(link: string) {
     this.router.navigate([link]);
   }
 
+  recentWorks: any[] = [];
+  isLoading = true;
 
+  loadRecentWorks(): void {
+    this.worksService.getRecentWorks(3).subscribe({
+      next: (works) => {
+        this.recentWorks = works;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading works:', error);
+        this.isLoading = false;
+      }
+    });
+  }
+
+  navigateToWorks(workId?: number): void {
+    console.log('Navigating to works with ID:', workId);
+    console.log('Router:', this.router);
+    if (workId) {
+      this.router.navigate(['/works'], { queryParams: { featured: workId } });
+    } else {
+      this.router.navigate(['/works']);
+    }
+  }
+
+  getWorkTags(tags: string[]): string {
+    return tags.slice(0, 2).join(' • ');
+  }
 
 }

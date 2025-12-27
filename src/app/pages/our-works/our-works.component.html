@@ -1,106 +1,165 @@
-<div class="our-works-page">
-  <!-- Hero Section -->
-  <section class="hero-section">
+<div class="works-page">
+  <!-- Header -->
+   <section class="hero-section">
     <div class="container">
       <div class="hero-content">
         <h1 class="hero-title">Our Works</h1>
         <p class="hero-description">
-          Showcasing our successful projects and innovative solutions
+          Selected case studies of our work
         </p>
       </div>
     </div>
+    <app-grid></app-grid>
   </section>
 
-  <!-- Filter Section -->
-  <section class="section filter-section">
+  <!-- Main Content -->
+  <main class="works-main">
     <div class="container">
-      <div class="filter-buttons">
-        <button 
-          *ngFor="let category of categories" 
-          class="filter-btn"
-          [class.active]="selectedCategory === category"
-          (click)="filterWorks(category)">
-          {{category}}
-        </button>
+      <!-- Category Filter -->
+      <div class="category-filter" *ngIf="!isLoading">
+        <div class="filter-container">
+          <span class="filter-label">Filter by:</span>
+          <div class="filter-buttons">
+            <button
+                *ngFor="let cat of getCategories()"
+                [class.active]="activeCategory === cat.name"
+                (click)="setCategory(cat.name)"
+                class="filter-btn"
+                >
+                {{cat.name === 'all' ? 'All Projects' : cat.name}}
+                <span class="filter-count" *ngIf="cat.name !== 'all'">
+                {{cat.count}}
+                </span>
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Works Grid -->
-  <section class="section works-section">
-    <div class="container">
-      <div class="works-grid">
-        <div class="work-card" *ngFor="let work of filteredWorks">
-          <div class="work-image">
-            <ng-container *ngIf="work.image; else workPlaceholder">
-              <ng-container *ngIf="work.mediaType === 'video'; else workImage">
-                <video class="work-video" [src]="work.image" controls preload="metadata"></video>
-              </ng-container>
-              <ng-template #workImage>
-                <img class="work-img" [src]="work.image" alt="{{work.title}}" />
-              </ng-template>
-            </ng-container>
-            <ng-template #workPlaceholder>
-              <div class="work-placeholder">
-                <i class="fas fa-image"></i>
+      <!-- Loading State -->
+      <div class="loading-works" *ngIf="isLoading">
+        <div class="loading-featured shimmer"></div>
+        <div class="loading-thumbnails">
+          <div class="loading-thumbnail shimmer" *ngFor="let item of [1,2,3,4,5,6]"></div>
+        </div>
+      </div>
+
+      <!-- Featured Work -->
+      <section class="featured-section" *ngIf="!isLoading && featuredWork">
+        <div class="featured-work">
+          <div class="featured-header">
+            <div class="featured-meta">
+              <span class="featured-category">{{featuredWork.category}}</span>
+              <span class="featured-year">{{featuredWork.year}}</span>
+            </div>
+            
+            <h2 class="featured-title">{{featuredWork.title}}</h2>
+            
+            <div class="featured-client">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 15C15.3137 15 18 12.3137 18 9C18 5.68629 15.3137 3 12 3C8.68629 3 6 5.68629 6 9C6 12.3137 8.68629 15 12 15Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M2.90527 20.2491C3.82736 18.6531 5.15322 17.3278 6.74966 16.4064C8.3461 15.485 10.1569 15 12 15C13.8431 15 15.6539 15.4851 17.2504 16.4065C18.8468 17.3279 20.1727 18.6533 21.0948 20.2493" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              {{featuredWork.client}}
+            </div>
+            <div class="featured-client">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15 3H21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <a href="{{featuredWork.appUrl}}" target="_blank">{{featuredWork.appUrl}}</a>
+            </div>
+          </div>
+
+          <div class="featured-image">
+            <div class="image-container">
+              <img 
+                [src]="featuredWork.image" 
+                [alt]="featuredWork.title"
+                loading="eager"
+              >
+              <div class="image-overlay-info">
+                <button class="btn-fullscreen" aria-label="View fullscreen">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 3H5C3.89543 3 3 3.89543 3 5V8M21 8V5C21 3.89543 20.1046 3 19 3H16M16 21H19C20.1046 21 21 20.1046 21 19V16M3 16V19C3 20.1046 3.89543 21 5 21H8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </button>
               </div>
-            </ng-template>
-            <div class="work-overlay">
-              <div class="work-category">{{work.category}}</div>
+            </div>
+            
+            <div class="featured-details">
+              <div class="details-content">
+                <h3>Project Overview</h3>
+                <p>{{featuredWork.description}}</p>
+                
+                <div class="details-meta">
+                  <div class="meta-item">
+                    <span class="meta-label">Duration</span>
+                    <span class="meta-value">{{featuredWork.duration}}</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label">Team Size</span>
+                    <span class="meta-value">{{featuredWork.teamSize}}</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label">Services</span>
+                    <span class="meta-value">{{featuredWork.services?.join(', ')}}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="details-tech">
+                <h3>Technologies Used</h3>
+                <div class="tech-tags">
+                  <span *ngFor="let tag of featuredWork.tags" class="tech-tag">
+                    {{tag}}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="work-content">
-            <h3 class="work-title">{{work.title}}</h3>
-            <p class="work-description">{{ work.description | slice:0:140 }}<span *ngIf="isLongDescription(work, 140)">...</span></p>
-            <button class="link-button" (click)="openWork(work)">Read more</button>
-            <div class="work-technologies">
-              <span class="tech-tag" *ngFor="let tech of work.technologies">{{tech}}</span>
+        </div>
+      </section>
+
+      <!-- Thumbnails Section -->
+      <section class="thumbnails-section" *ngIf="!isLoading && thumbnails.length > 0">
+        <div class="thumbnails-header">
+          <h3 class="thumbnails-title">
+            <span>More Projects</span>
+            <span class="thumbnails-count">({{thumbnails.length}})</span>
+          </h3>
+          <p class="thumbnails-subtitle">Click any project to view details</p>
+        </div>
+
+        <div class="thumbnails-grid">
+          <div 
+            *ngFor="let work of thumbnails"
+            class="thumbnail-card"
+            [class.active]="work.id === featuredWork?.id"
+            (click)="selectWork(work)"
+          >
+            <div class="thumbnail-image">
+              <img 
+                [src]="work.image" 
+                [alt]="work.title"
+                loading="lazy"
+              >
+              <div class="thumbnail-overlay">
+                <span class="overlay-text">View Project</span>
+              </div>
+            </div>
+            
+            <div class="thumbnail-content">
+              <div class="thumbnail-meta">
+                <span class="thumbnail-category">{{work.category}}</span>
+                <span class="thumbnail-year">{{work.year}}</span>
+              </div>
+              <h4 class="thumbnail-title">{{work.title}}</h4>
+              <p class="thumbnail-excerpt">{{work.excerpt}}</p>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="section section-dark cta-section">
-    <div class="container">
-      <div class="cta-content">
-        <h2 class="cta-title">Have a Project in Mind?</h2>
-        <p class="cta-description">
-          Let's work together to bring your vision to life
-        </p>
-        <a routerLink="/contact-us" class="btn btn-primary">Start Your Project</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Work Modal -->
-  <div class="modal-backdrop" *ngIf="showWorkModal" (click)="closeWorkModal()"></div>
-  <div class="modal" *ngIf="showWorkModal">
-    <div class="modal-content">
-      <button class="modal-close" (click)="closeWorkModal()" aria-label="Close">
-        <i class="fas fa-times"></i>
-      </button>
-      <ng-container *ngIf="activeWork as work">
-        <div class="modal-cover">
-          <ng-container *ngIf="work.mediaType === 'video'; else bigImage">
-            <video class="work-video" [src]="work.image" controls preload="metadata" style="width:100%; height:auto; border-radius:12px;"></video>
-          </ng-container>
-          <ng-template #bigImage>
-            <img [src]="work.image" [alt]="work.title" style="width:100%; height:420px; object-fit:contain; border-radius:12px;" />
-          </ng-template>
-        </div>
-        <h2 class="modal-title">{{ work.title }}</h2>
-        <div class="modal-meta">
-          <span class="tag">#{{ work.category }}</span>
-          <span class="dot">•</span>
-          <span class="tags-inline">
-            <span class="tag" *ngFor="let t of work.technologies">#{{ t }}</span>
-          </span>
-        </div>
-        <div class="modal-body">{{ work.description }}</div>
-      </ng-container>
-    </div>
-  </div>
+  </main>
 </div>

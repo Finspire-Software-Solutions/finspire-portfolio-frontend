@@ -35,21 +35,25 @@
       </div>
       </div>
       </div>
+  <app-grid></app-grid>
 </section>
-
-<!-- Services Preview Section -->
+<!-- Featured Work Section -->
 <section class="section services-preview">
   <div class="container">
     <h2 class="section-title">Our Services</h2>
     <p class="section-subtitle">Comprehensive solutions for your digital transformation</p>
     
-    <div class="services-grid">
-      <div class="service-card" *ngFor="let service of services">
-        <div class="service-card-icon">
-          <i [class]="service.icon"></i>
+    <div class="services-modern-grid">
+      <div class="service-modern-card" *ngFor="let service of services">
+        <div class="service-card-left">
+          <div class="service-icon-circle">
+            <i [class]="service.icon"></i>
+          </div>
         </div>
-        <h3 class="service-card-title">{{service.name}}</h3>
-        <p class="service-card-description">Professional {{service.name.toLowerCase()}} services tailored to your needs</p>
+        <div class="service-card-right">
+          <h3 class="service-card-title">{{service.name}}</h3>
+          <p class="service-card-description">Professional {{service.name.toLowerCase()}} services tailored to your needs</p>
+        </div>
       </div>
     </div>
     
@@ -57,10 +61,29 @@
       <a routerLink="/services" class="btn btn-primary">View All Services</a>
     </div>
   </div>
+  
 </section>
-
+<!-- Clients Logo Slider Section -->
+<section class="section clients-slider">
+  <div class="container clients-slider-container">
+    <h2 class="section-title2">Trusted By</h2>
+    <p class="section-subtitle">Leading businesses and organizations</p>
+    
+    <div class="slider-container">
+      <div class="slider-track">
+        <div class="client-logo" *ngFor="let client of clients">
+          <img [src]="client.logo" [alt]="client.name" />
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="client-logo" *ngFor="let client of clients">
+          <img [src]="client.logo" [alt]="client.name" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- Works Preview Section -->
-<section class="section section-dark works-preview">
+<!-- <section class="section section-dark works-preview">
   <div class="container">
     <h2 class="section-title">Our Recent Works</h2>
     <p class="section-subtitle">Showcasing our latest projects and achievements</p>
@@ -83,8 +106,87 @@
       <a routerLink="/our-works" class="btn btn-primary">View All Works</a>
     </div>
   </div>
+</section> -->
+<!-- Recent Works Section -->
+<section class="section-recent-works">
+  <div class="container">
+    <div class="section-header">
+      <div class="title-group">
+        <h2 class="section-title">Recent Case Studies</h2>
+      </div>
+      <p class="section-subtitle">
+        Explore our latest projects where innovative design meets strategic thinking to deliver exceptional results.
+      </p>
+    </div>
+    <!-- Loading State -->
+    <div class="loading-state" *ngIf="isLoading">
+      <div class="loading-grid">
+        <div class="loading-card" *ngFor="let item of [1,2,3,4]">
+          <div class="loading-image shimmer"></div>
+          <div class="loading-content">
+            <div class="shimmer title-shimmer"></div>
+            <div class="shimmer text-shimmer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Works Grid -->
+    <div class="works-preview-grid" *ngIf="!isLoading">
+      <div 
+        class="preview-card" 
+        *ngFor="let work of recentWorks"
+        (click)="navigateToWorks(work.id)"
+        [attr.data-category]="work.category">
+        <div class="preview-card-inner">
+          <div class="preview-image">
+            <div class="image-wrapper">
+              <img 
+                [src]="work.image" 
+                [alt]="work.title"
+                [attr.loading]="work.id === recentWorks[0].id ? 'eager' : 'lazy'"
+              >
+              <div class="image-overlay">
+                <button class="quick-view-btn" aria-label="View project details">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="white" stroke-width="2"/>
+                    <path d="M2 12C3.60014 7.90299 7.33603 5 12 5C16.664 5 20.3999 7.90299 22 12C20.3999 16.097 16.664 19 12 19C7.33603 19 3.60014 16.097 2 12Z" stroke="white" stroke-width="2"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="preview-content">
+            <div class="preview-header">
+              <span class="work-category">{{work.category}}</span>
+              <span class="work-year">{{work.year}}</span>
+            </div>
+            
+            <h3 class="work-title">{{work.title}}</h3>
+            <p class="work-excerpt">{{work.excerpt}}</p>
+            
+            <div class="work-meta">
+              <span class="work-client">{{work.client}}</span>
+              <span class="work-tags">{{getWorkTags(work.tags)}}</span>
+            </div>
+            
+            <div class="preview-action">
+              <button class="btn-preview" (click)="navigateToWorks(work.id); $event.stopPropagation()">
+                View Case Study
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section-action">
+      <a routerLink="/works" class="btn btn-primary">View All Works</a>
+    </div>
+  </div>
 </section>
-
 <!-- About Preview Section -->
 <section class="section about-preview">
   <div class="container">
@@ -120,53 +222,9 @@
     </div>
   </div>
 </section>
-<!-- Clients Preview Section -->
-<!-- <section class="section clients-preview">
-  <div class="container">
-    <h2 class="section-title">Our Clients</h2>
-    <p class="section-subtitle">Trusted by leading businesses and organizations</p>
-    
-    <div class="clients-grid">
-      <div class="client-card" *ngFor="let client of clients">
-        <div class="client-image">
-          <div class="client-placeholder">
-            <img [src]="client.image" [alt]="client.name">
-          </div>
-        </div>
-        <div class="client-content">
-          <h3 class="client-title">{{client.name}}</h3>
-          <p class="client-description">{{client.description}}</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="section-action">
-      <a routerLink="/clients" class="btn btn-primary">View All Clients</a>
-    </div>
-  </div>
-</section> -->
-<!-- Contact Preview Section -->
-<section class="section section-dark contact-preview">
-  <div class="container">
-    <div class="contact-content">
-      <h2 class="section-title">Ready to Start Your Project?</h2>
-      <p class="section-subtitle">Let's discuss how we can help bring your ideas to life</p>
-      <div class="contact-info">
-        <div class="contact-item">
-          <i class="fas fa-envelope"></i>
-          <span>finspire001@gmail.com</span>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-phone"></i>
-          <span>+94 77 042 7773, </span>
-          <span>+94 76 324 4160</span>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>Kilinochchi, Nothern Province, Sri Lanka</span>
-        </div>
-      </div>
-      <a routerLink="/contact-us" class="btn btn-primary">Contact Us</a>
-    </div>
-  </div>
-</section>
+<app-blog
+ [limitProducts]="3" 
+ [showFilters]="false" 
+ [showViewAll]="true"
+ [showHero]="false">
+</app-blog>

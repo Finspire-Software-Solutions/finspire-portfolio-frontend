@@ -3,6 +3,6 @@ export interface ProjectRequestDto {
     category: string;
     description: string;
     technologies: string[];
-    mediaType: string;
+    mediaType?:'image' | 'video' | string | null;
     featured: boolean;
 }

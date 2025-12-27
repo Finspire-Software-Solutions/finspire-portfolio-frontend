@@ -1,116 +1,157 @@
 <div class="blog-page">
   <!-- Hero Section to match other pages -->
-  <section class="hero-section">
+  <section class="hero-section" *ngIf="showHero">
     <div class="container">
       <div class="hero-content">
         <h1 class="hero-title">Blog</h1>
         <p class="hero-description">Insights, updates, and stories from our team.</p>
       </div>
     </div>
+    <app-grid></app-grid>
   </section>
-
+  <div class="container" *ngIf="!showHero">
+    <h2 class="section-title">Recent Blog Posts</h2>
+    <p class="section-subtitle">Insights, updates, and stories from our team.</p>
+   </div>
   <!-- Blog Content Section -->
   <section class="section blog-section">
     <div class="container">
-      <div class="blog-header">
+      
+      <!-- Filter Header -->
+      <div class="blog-header" *ngIf="showHero">
         <div class="filters">
           <label class="filter-label">Filter by tag</label>
-          <select [(ngModel)]="selectedTag" class="filter-select">
+          <select [(ngModel)]="selectedTag" (ngModelChange)="onTagChange()" class="filter-select">
             <option *ngFor="let tag of tags" [value]="tag">{{ tag }}</option>
           </select>
         </div>
+        <button *ngIf="featuredBlog" class="btn btn-outline btn-sm" (click)="clearFeatured()">
+          <i class="fas fa-th"></i> View All Equal
+        </button>
       </div>
 
-      <div class="posts-grid">
-        <article class="post-card" *ngFor="let post of filtered">
-          <div class="cover" *ngIf="post.coverImage">
-            <img [src]="post.coverImage" [alt]="post.title" />
+      <!-- Featured Blog (Large Display) -->
+      <div class="featured-blog" *ngIf="featuredBlog" @fadeIn>
+        <div class="featured-wrapper">
+          <!-- Featured Image -->
+          <div class="featured-image-container">
+            <img [src]="featuredBlog.coverImage" [alt]="featuredBlog.title" class="featured-image">
+            <div class="featured-overlay"></div>
+            <span class="featured-category">{{ featuredBlog.category }}</span>
+            <button class="featured-close" (click)="clearFeatured()" aria-label="Close featured view">
+              <i class="fas fa-times"></i>
+            </button>
           </div>
-          <div class="content">
-            <h2 class="post-title">{{ post.title }}</h2>
-            <div class="meta">
-              <span class="date"><i class="fas fa-calendar"></i> {{ post.createdDate | date:'MMM dd, yyyy' }}</span>
+          
+          <!-- Featured Content -->
+          <div class="featured-content">
+            <h2 class="featured-title">{{ featuredBlog.title }}</h2>
+            
+            <div class="featured-meta">
+              <span class="meta-item">
+                <i class="fas fa-user"></i> By {{ featuredBlog.author }}
+              </span>
+              <span class="meta-item">
+                <i class="fas fa-calendar-alt"></i> {{ featuredBlog.createdDate | date:'MMMM dd, yyyy' }}
+              </span>
             </div>
-            <p class="excerpt">{{ post.content | slice:0:180 }}<span *ngIf="isLong(post, 180)">...</span></p>
-            <button class="link-button" (click)="openPost(post)">Read more</button>
-            <div class="tags">
-              <span class="tag" *ngFor="let t of post.tags">#{{ t }}</span>
+            
+            <div class="featured-tags">
+              <span class="tag" *ngFor="let t of featuredBlog.tags">#{{ t }}</span>
             </div>
-            <div class="modal-social">
-              <a *ngIf="post.instagramLink" [href]="post.instagramLink" target="_blank" class="social-link instagram" aria-label="Instagram">
+            
+            <div class="featured-body">
+              {{ featuredBlog.content }}
+            </div>
+            
+            <!-- Social Links -->
+            <div class="featured-social">
+              <a *ngIf="featuredBlog.instagramLink" [href]="featuredBlog.instagramLink" target="_blank" class="social-link instagram">
                 <i class="fab fa-instagram"></i>
               </a>
-              <a *ngIf="post.facebookLink" [href]="post.facebookLink" target="_blank" class="social-link facebook" aria-label="Facebook">
+              <a *ngIf="featuredBlog.facebookLink" [href]="featuredBlog.facebookLink" target="_blank" class="social-link facebook">
                 <i class="fab fa-facebook-f"></i>
               </a>
-              <a *ngIf="post.linkedinLink" [href]="post.linkedinLink" target="_blank" class="social-link linkedin" aria-label="LinkedIn">
+              <a *ngIf="featuredBlog.linkedinLink" [href]="featuredBlog.linkedinLink" target="_blank" class="social-link linkedin">
                 <i class="fab fa-linkedin-in"></i>
               </a>
-              <a *ngIf="post.githubLink" [href]="post.githubLink" target="_blank" class="social-link github" aria-label="GitHub">
+              <a *ngIf="featuredBlog.githubLink" [href]="featuredBlog.githubLink" target="_blank" class="social-link github">
                 <i class="fab fa-github"></i>
               </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Divider (when featured exists) -->
+      <div class="other-blogs-header" *ngIf="featuredBlog && otherBlogs.length > 0">
+        <h3 class="other-blogs-title">More Articles</h3>
+        <div class="divider-line"></div>
+      </div>
+
+      <!-- Blog Grid -->
+      <div class="posts-grid" [class.has-featured]="featuredBlog">
+        <article class="post-card" *ngFor="let blog of otherBlogs" (click)="selectFeatured(blog)">
+          <!-- Card Image -->
+          <div class="card-image-wrapper" *ngIf="blog.coverImage">
+            <img [src]="blog.coverImage" [alt]="blog.title" class="card-image">
+            <div class="card-overlay"></div>
+            <span class="card-category">{{ blog.category }}</span>
+          </div>
+          
+          <!-- Card Content -->
+          <div class="card-content">
+            <h3 class="card-title">{{ blog.title }}</h3>
+            
+            <div class="card-meta">
+              <span class="meta-item">
+                <i class="fas fa-user"></i> {{ blog.author }}
+              </span>
+              <span class="meta-item">
+                <i class="fas fa-calendar"></i> {{ blog.createdDate | date:'MMM dd, yyyy' }}
+              </span>
+            </div>
+            
+            <p class="card-excerpt">
+              {{ blog.excerpt || (blog.content | slice:0:150) }}
+              <span *ngIf="isLong(blog, 150)">...</span>
+            </p>
+            
+            <div class="card-footer">
+              <span class="read-more-link">
+                Read More <i class="fas fa-arrow-right"></i>
+              </span>
+              <div class="card-tags">
+                <span class="tag-small" *ngFor="let t of blog.tags | slice:0:2">#{{ t }}</span>
+              </div>
             </div>
           </div>
         </article>
       </div>
 
-      <div class="empty-state" *ngIf="filtered.length === 0">
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="otherBlogs.length === 0 && !featuredBlog">
         <i class="fas fa-file-alt"></i>
         <h3>No blog posts</h3>
-        <p>Please check back later.</p>
+        <p>Please check back later for new articles.</p>
       </div>
 
-      <!-- Pagination Controls -->
+      <!-- Pagination -->
       <div class="pagination" *ngIf="totalPages > 1">
-        <button class="btn btn-outline" (click)="prevPage()" [disabled]="page === 0">Prev</button>
+        <button class="btn btn-outline" (click)="prevPage()" [disabled]="page === 0">
+          <i class="fas fa-chevron-left"></i> Prev
+        </button>
         <ng-container *ngFor="let p of [].constructor(totalPages); let i = index">
           <button class="btn" [class.btn-primary]="i === page" [class.btn-outline]="i !== page" (click)="goToPage(i)">
             {{ i + 1 }}
           </button>
         </ng-container>
-        <button class="btn btn-outline" (click)="nextPage()" [disabled]="page + 1 >= totalPages">Next</button>
-        <span class="page-info">Page {{ page + 1 }} of {{ totalPages }} ({{ totalElements }} items)</span>
+        <button class="btn btn-outline" (click)="nextPage()" [disabled]="page + 1 >= totalPages">
+          Next <i class="fas fa-chevron-right"></i>
+        </button>
+        <span class="page-info">Page {{ page + 1 }} of {{ totalPages }}</span>
       </div>
+      
     </div>
   </section>
-
-  <!-- Blog Post Modal -->
-  <div class="modal-backdrop" *ngIf="showPostModal" (click)="closePostModal()"></div>
-  <div class="modal" *ngIf="showPostModal">
-    <div class="modal-content">
-      <button class="modal-close" (click)="closePostModal()" aria-label="Close">
-        <i class="fas fa-times"></i>
-      </button>
-      <ng-container *ngIf="activePost as post">
-        <div class="modal-cover" *ngIf="post.coverImage">
-          <img [src]="post.coverImage" [alt]="post.title" />
-        </div>
-        <h2 class="modal-title">{{ post.title }}</h2>
-        <div class="modal-meta">
-          <span class="date"><i class="fas fa-calendar"></i> {{ post.createdDate | date:'MMM dd, yyyy' }}</span>
-          <span class="dot">•</span>
-          <span class="tags-inline">
-            <span class="tag" *ngFor="let t of post.tags">#{{ t }}</span>
-          </span>
-        </div>
-        <div class="modal-body">
-          {{ post.content }}
-        </div>
-        <div class="modal-social">
-          <a *ngIf="post.instagramLink" [href]="post.instagramLink" target="_blank" class="social-link instagram" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a *ngIf="post.facebookLink" [href]="post.facebookLink" target="_blank" class="social-link facebook" aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a *ngIf="post.linkedinLink" [href]="post.linkedinLink" target="_blank" class="social-link linkedin" aria-label="LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-          <a *ngIf="post.githubLink" [href]="post.githubLink" target="_blank" class="social-link github" aria-label="GitHub">
-            <i class="fab fa-github"></i>
-          </a>
-        </div>
-      </ng-container>
-    </div>
-  </div>
 </div>
