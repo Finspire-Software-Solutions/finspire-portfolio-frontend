@@ -26,6 +26,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth'; // Optional: if using Firebase Auth
 import { environment } from '../environments/environment';
 import { GridComponent } from './components/grid/grid.component';
+import { SocialLinksComponent } from './components/socialLinks/social-links/social-links.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { GridComponent } from './components/grid/grid.component';
     BlogComponent,
     LoginComponent,
     ToastContainerComponent,
-    GridComponent
+    GridComponent,
+    SocialLinksComponent
     
   ],
   imports: [

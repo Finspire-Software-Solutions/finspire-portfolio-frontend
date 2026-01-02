@@ -1,0 +1,230 @@
+.social-media-icons {
+  position: fixed;
+  top: 20%;
+  right: 2%;
+  transform: translateY(-50%);
+  z-index: 1000;
+}
+
+.social-media-float {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.social-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 15px 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: white;
+  font-size: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Platform-specific colors */
+.social-link.linkedin { 
+  background: #0077B5;
+  box-shadow: 0 4px 12px rgba(0, 119, 181, 0.3);
+}
+
+.social-link.github { 
+  background: #333;
+  box-shadow: 0 4px 12px rgba(51, 51, 51, 0.3);
+}
+
+.social-link.twitter { 
+  background: #1DA1F2;
+  box-shadow: 0 4px 12px rgba(29, 161, 242, 0.3);
+}
+
+.social-link.instagram { 
+  background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+  box-shadow: 0 4px 12px rgba(193, 53, 132, 0.3);
+}
+
+.social-link.facebook { 
+  background: #1877F2;
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+}
+
+/* Hover effects */
+.social-link:hover {
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Pulse animation on hover */
+@keyframes socialPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.social-link:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  animation: socialPulse 1.5s infinite;
+}
+
+/* Tooltip */
+.social-link::before {
+  content: attr(title);
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 1001;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.social-link:hover::before {
+  opacity: 1;
+  visibility: visible;
+  left: 55px;
+}
+
+/* Mobile responsive */
+@media (max-width: 1024px) {
+
+
+  .social-container {
+    gap: 12px;
+    padding: 15px 30px;
+  }
+  
+  .social-link {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .social-media-icons {
+    top: 90px;
+    bottom: 0px; /* Position near bottom for mobile */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    ;
+  }
+  
+  .social-container {
+    flex-direction: row;
+    padding: 10px 20px;
+    border-radius: 10px;
+    gap: 10px;
+  }
+  
+  .social-link::before {
+    top: auto;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .social-link:hover::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 480px) {
+  .social-container {
+    padding: 8px 16px;
+    gap: 16px;
+  }
+  
+  .social-link {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+}
+
+/* Hide on print */
+@media print {
+  .social-media-icons {
+    display: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .social-container {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .social-link::before {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+  }
+}
+
+/* Animation for initial load */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px) translateY(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(-50%);
+  }
+}
+
+.social-media-icons {
+  animation: slideInFromLeft 0.6s ease-out;
+}
+
+/* For mobile landscape */
+@media (max-height: 500px) and (orientation: landscape) {
+  .social-media-icons {
+    top: 20px;
+    bottom: auto;
+    transform: none;
+  }
+}

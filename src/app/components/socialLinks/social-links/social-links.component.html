@@ -1,0 +1,15 @@
+<section class="social-media-icons">
+  <div class="social-media-float">
+  <div class="social-container">
+    <a *ngFor="let social of socialLinks" 
+       [href]="social.link" 
+       [title]="social.name"
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="social-link"
+       [class]="social.className">
+      <i [class]="social.icon"></i>
+    </a>
+  </div>
+</div>
+</section>

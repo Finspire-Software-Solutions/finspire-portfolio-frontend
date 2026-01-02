@@ -48,7 +48,38 @@ works = [
     logo: 'https://res.cloudinary.com/dc7gkgjja/image/upload/v1766665644/Screenshot_2025-12-14_233145_fuszyr.png'
   }
 ];
-
+socialLinks = [
+    {
+      name: 'LinkedIn',
+      icon: 'fab fa-linkedin-in',
+      link: 'https://linkedin.com/in/yourprofile',
+      className: 'linkedin'
+    },
+    {
+      name: 'GitHub',
+      icon: 'fab fa-github',
+      link: 'https://github.com/yourusername',
+      className: 'github'
+    },
+    {
+      name: 'Twitter',
+      icon: 'fab fa-twitter',
+      link: 'https://twitter.com/yourhandle',
+      className: 'twitter'
+    },
+    {
+      name: 'Instagram',
+      icon: 'fab fa-instagram',
+      link: 'https://instagram.com/yourprofile',
+      className: 'instagram'
+    },
+    {
+      name: 'Facebook',
+      icon: 'fab fa-facebook-f',
+      link: 'https://facebook.com/yourpage',
+      className: 'facebook'
+    }
+  ];
   private rotationDegree = 0;
   private radius = 200;
   hoveredService: any = null;
