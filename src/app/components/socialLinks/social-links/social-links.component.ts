@@ -25,5 +25,12 @@ socialLinks = [
       link: 'https://www.facebook.com/share/1LaM55SZjo/',
       className: 'facebook'
     }
+    ,
+    {
+      name: 'Whatsapp',
+      icon: 'fab fa-whatsapp',
+      link: 'https://wa.me/94763244160',
+      className: 'whatsapp'
+    }
   ];
 }
