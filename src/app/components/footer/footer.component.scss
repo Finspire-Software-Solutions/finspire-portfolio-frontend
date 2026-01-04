@@ -22,7 +22,11 @@
   .footer-section {
     &.company-info {
       text-align: left;
-
+      img {
+        height: 60px;
+        width: auto;
+        margin:  0px -26px -10px
+      }
       .company-name {
         font-size: 1.1rem;
         font-weight: 600;

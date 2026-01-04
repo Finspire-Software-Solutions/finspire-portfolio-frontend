@@ -1,5 +1,5 @@
 .navbar {
-  background: rgba(255, 255, 255, 0.95);
+  background: #00014d;
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   position: fixed;
@@ -36,21 +36,22 @@
       .nav-item {
         .nav-link {
           text-decoration: none;
-          color: #64748b;
+          color: #ffffff;
           font-weight: 500;
           padding: 0.5rem 1rem;
-          border-radius: 8px;
+          border-radius: 5px;
           transition: all 0.3s ease;
           position: relative;
+          border: 0.1px solid transparent;
 
           &:hover {
-            color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
+            // background: rgb(255, 255, 255);
+            border: 0.1px solid #ffffff;
           }
 
           &.active {
-            color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
+            // background: rgb(255, 255, 255);
+            border: 0.1px solid #ffffff;
           }
 
           &.admin-link {

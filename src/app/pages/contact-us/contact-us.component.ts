@@ -14,8 +14,8 @@ export class ContactUsComponent implements OnInit {
     {
       icon: 'fas fa-envelope',
       title: 'Email',
-      value: 'finspire001@gmail.com',
-      link: 'mailto:finspire001@gmail.com'
+      value: 'contact.finspire@gmail.com',
+      link: 'mailto:contact.finspire@gmail.com'
     },
     {
       icon: 'fas fa-phone',
